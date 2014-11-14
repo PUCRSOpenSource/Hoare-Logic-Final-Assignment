@@ -1,40 +1,44 @@
 \section{Introdução}
-No escopo de disciplina de Métodos Formais o segundo trabalho a ser desenvolvido
-da seguinte maneira: dado dois algoritmos, na forma de pseudo código, deve ser
-demonstrada a prova de correção utilizando os conceitos da lógica de Hoare.
+No escopo de disciplina de Métodos Formais o segundo trabalho pode ser
+desenvolvido da seguinte maneira: dado dois algoritmos, na forma de pseudo
+código, deve ser demonstrada a prova de correção utilizando os conceitos da
+lógica de Hoare.
 
 A enunciado da tarefa apresenta dois algoritmos no seguinte formato:
 
-\begin{algorithm}
-    \caption{Algoritmo 01}\label{alg01}
-    \begin{algorithmic}
-        \Function{Algoritmo 01}{$x$}
-        \State $i\gets 1$
-        \State $j\gets 4$
-        \While{$i\ \ne \ x$}
-        \State $j \gets j\ +\ 2\ *\ i\ +\ 3$
-        \State $i\gets i\ +\ 1$
-        \EndWhile\label{euclidendwhile}
-        \EndFunction
-    \end{algorithmic}
-\end{algorithm}
+\begin{minipage}{6cm}
+\null 
+  \begin{algorithm}[H]
+    \caption{Algoritmo 1}
+      \Function{Algoritmo 01}{$x$}
+      \State $i\gets 1$
+      \State $j\gets 4$
+      \While{$i\ \ne \ x$}
+      \State $j \gets j\ +\ 2\ *\ i\ +\ 3$
+      \State $i\gets i\ +\ 1$
+      \EndWhile\label{euclidendwhile}
+      \EndFunction
+  \end{algorithm}
+\end{minipage}%
+\begin{minipage}{6cm}
+\null
+  \begin{algorithm}[H]
+    \caption{Algoritmo 2}
+      \Function{Algoritmo 02}{$x,\ y,\ n$}
+      \State $i\gets 0$
+      \State $j\gets x$
+      \While{$i\ \ne \ n$}
+      \State $j \gets j\ *\ i$
+      \State $i\gets i\ +\ 1$
+      \EndWhile\label{euclidendwhile}
+      \EndFunction
+  \end{algorithm}
+\end{minipage}
 
-\begin{algorithm}
-    \caption{Algoritmo 02}\label{alg02}
-    \begin{algorithmic}
-        \Function{Algoritmo 02}{$x,\ y,\ n$}
-        \State $i\gets 0$
-        \State $j\gets x$
-        \While{$i\ \ne \ n$}
-        \State $j \gets j\ *\ i$
-        \State $i\gets i\ +\ 1$
-        \EndWhile\label{euclidendwhile}
-        \EndFunction
-    \end{algorithmic}
-\end{algorithm}
+\vspace{0.3cm}
 
-Após a definiçãos dos algoritmos é necessário explicar com os devidos detalhes
-a função que cada um computa, bem como a tupla de Hoare correspondente. Também
-será definido para cada um dos algoritmos a invariante do loop bem como a prova
-por indução correspondente. Após a prova da indução será abordada a prova de
-correção parcial para cada tupla de Hoare que for apresentada.
+Após a definiçãos dos algoritmos é necessário explicar com os devidos detalhes a
+função que cada um computa, bem como a tupla de Hoare correspondente. Também
+será definido, para cada um dos algoritmos, a invariante do laço e sua prova por
+indução correspondente. A seguir será abordada a prova de correção parcial para
+cada tupla de Hoare que for apresentada.
