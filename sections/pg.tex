@@ -1,0 +1,9 @@
+\section{Algoritmo 2}
+\label{sec:Algoritmo 2}
+
+O algotimo 2 retorna o n-ésimo termo de uma progressão geométrica de razão
+\emph{y} e como termo inicial o valor \emph{x}. Este algoritmo pode ser
+expresso, utilizando a notação de Hoare, da seguinte forma:
+
+$$(\!|\ x\ \geq\ 0\ \wedge x\ =\ x_0\ \wedge\ y=y_0|\!) i\ :=\ 0; j :=\ x;\
+while\ i \neq\ n \{j\ :=\ j\ *\ y;\ i\ :=\ i\ +\ 1\}(\!| j=x y^n |\!) $$
