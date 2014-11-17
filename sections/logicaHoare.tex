@@ -1,0 +1,30 @@
+\section{Lógica de Hoare}
+\label{sec:LógicadeHoare}
+
+Lógica de Hoare é um sistema formal com um conjunto de regras lógicas para um
+raciocínio rigoroso sobre a corretude de um programa de computador.
+
+\subsection{Tripla de Hoare}
+\label{sub:tripla}
+
+Uma das mais importantes propriedades de um programa é se ele faz ou não faz a
+sua função. A intencional função de um programa, ou parte de um programa, pode
+ser especificada fazendo asserções gerais sobre os valores em que as variáveis
+relevantes vão ter \emph{depois} da execução do programa. Essas asserções
+geralmente não vão atribuir valores particulares para cada variável, mas sim
+especificar certas propriedades gerais dos valores e das relações entre elas.
+
+Em muitos casos, a validade dos resultados de um programa, ou parte de um
+programa, vai depender dos valores tomados pelas variáveis antes desse programa
+ser iniciado. Essas precondições iniciais de uso bem sucedido podem ser
+especificadas pelo mesmo tipo de asserção geral como é usado para descrever os
+resultados obtidos na terminação. Para estabelecer a conexão requirida entre a
+precondição ($P$), um programa ($Q$) e a descrição do resultado da sua execução
+($R$), foi introduzido uma nova notação: \[(\!|\  P\  |\!)\; Q\; (\!|\  R\
+|\!)\]
+
+Isso pode ser interpretado como "Se a asserção $P$ for verdadeira antes do
+inícido do programa $Q$, então a asserção $R$ será verdadeira após sua
+execução." Se não houver precondições impostas, escrevemos como  $(\!|\  true\
+|\!)\; Q\; (\!|\  R\ |\!)$\cite{hoare:68}.
+
