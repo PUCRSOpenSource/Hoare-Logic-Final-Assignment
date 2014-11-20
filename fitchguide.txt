@@ -1,0 +1,69 @@
+Here's a basic guide to formatting logical proofs using Johan Klüwer's fitch package.
+First, you'll have to include the fitch package. Make sure fitch.sty is in your LaTeX path, and put the following command in your LaTeX document:
+
+
+\usepackage{fitch}
+Now you're ready to rock. The basic fitch container syntax is this:
+\begin{equation*}
+\begin{fitch}
+...
+\end{fitch}
+\end{equation*}
+Hence, you start an equation (the star suppresses numbering of the equation), and then you begin fitch. 
+
+To set proofs, I use four basic commands. But to simplify, I will start by introducing two of the commands.
+	\fa --- used for standard proof step; displays a vertical line
+	\fh --- used for a hypothesis; displays a vertical line with a bar
+Here is a simple proof typeset using just these commands. I give the output first and then the code: 
+
+\begin{equation*}
+\begin{fitch}
+\fh A A A & Assumption \\
+\fa B B B & Main Proof Step \\
+\fa C C C & Another Main Proof Step\\
+\fa \fh D D D & New Assumption \\
+\fa \fa E E E & Subproof Step \\
+\fa \fa F F F & Another Subproof Step \\
+\fa G G G & Main Proof Step \\
+\fa H H H & Main Proof Step
+\end{fitch}
+\end{equation*}
+As you can see, each line of the proof starts with one of the commands \fa or \fh , where \fh is used for assumptions and \fa is used for proof steps. The ampersand & is used to denote the beginning of the justification for the step. Prior to the ampersand, you are in math mode. Afterwards, you are in regular text mode. Finally, \\ is used to end the line. To format subproofs, you simply nest \fa commands. The fitch.sty package takes care of line numbering, formatting, etc. for you. Here is an actual proof typeset using just these two commands. 
+
+
+\begin{equation*}
+\begin{fitch}
+\fh X & $~\mathbf{A}$ \\
+\fa \fh (A \to \lnot A) \land (\lnot A \to A) & $~\mathbf{A}$ \\
+\fa \fa A \to \lnot A & 2 $\land~\mathbf{E}$\\
+\fa \fa \lnot A \to A & 2 $\land~\mathbf{E}$\\
+\fa \fa \fh A & $~\mathbf{A}$ \\
+\fa \fa \fa \lnot A & 3, 5 $\to\mathbf{E}$\\
+\fa \fa \fa A & 5 $~\mathbf{R}$\\
+\fa \fa \lnot A & 5-7 $\lnot~\mathbf{I}$\\
+\fa \fa \fh \lnot A & $~\mathbf{A}$ \\
+\fa \fa \fa A & 4, 9 $\to\mathbf{E}$\\
+\fa \fa \fa \lnot A & 9 $~\mathbf{R}$ \\
+\fa \fa A & 9-11 $\lnot~\mathbf{I^+}$\\
+\fa \lnot ((A \to \lnot A) \land (\lnot A \to A)) & 2-12 $\lnot~\mathbf{I^+}$
+\end{fitch}
+\end{equation*}
+
+OK, now there are two more commands to learn. They are used when you've got more than one assumption:
+	\fb --- just like \fa, except the top of the line is a bit shorter
+	\fj --- just like \fh, except the top of the line is a bit longer
+Here is a sample that uses these new codes: 
+
+
+\begin{equation*}
+\begin{fitch}
+\fb A A A & Assumption 1 \\
+\fa B B B & Assumption 2 \\
+\fj C C C & Assumption 3 \\
+\fa D D D & Main proof step \\
+\fa E E E & Another main proof step\\
+\fa F F F & Another main proof step\\
+\end{fitch}
+\end{equation*}
+Source(s):
+http://angasm.org/papers/fitch/

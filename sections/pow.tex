@@ -2,7 +2,127 @@
 \label{sec:alg1}
 
 O Algortimo 1 tem o objetivo de computar a seguinte operação: dado uma variável
-\emph{x} o algoritmo retorna $(x\ +\ 1)^2$ e poder representado com a seguinte
-tupla de hoare:
+\emph{x} o algoritmo retorna $(x\ +\ 1)^2$ e pode ser representado com a
+seguinte tupla de hoare:
 
-$$(\!|\ x\ >\ 0\ |\!)\ i\ :=\ 1; j\ :=\ 4;\ while\ i\ \neq x\ \{\ j\ :=\ j\ +\ 2\ *\ i\ +\ 3; i\ := i\ +\ 1\ \}(\!|\ j\ =\ (x\ +\ 1)^2\ |\!)$$
+$$(\!|\ x > 0\ |\!)\ i := 1;\ j := 4\ \text{while}\ i \neq x \left\{j := j + 2 \times i + 3;\ i := i + 1\right\}\ (\!|\ j = (x + 1)^2\ |\!)$$
+
+Depois de termos provado a invariante do \emph{laço} \[INV = j = (i + 1)^2
+\land i \leq x\] estamos aptos para verificar se o programa correspondente ao
+algoritmo 1 está correto.
+
+\begin{equation*}
+  \begin{fitch}
+    \fa (\!|\ j = (i + 2)^2 \land i + 1 \leq x\ |\!)\ i := i + 1\ (\!|\ INV\ |\!) & ATR \\
+    \fa 
+      \begin{split}
+        &(\!|\ j + 2 \times i + 3 = (i + 2)^2 \land i + 1 \leq x\ |\!) \\
+        &j := j + 2 \times i + 3 \\
+        &(\!|\ j = (i + 2)^2 \land i + 1 \leq x\ |\!) \\
+      \end{split}
+      & ATR \\
+    \fa 
+      \begin{split}
+        &(\!|\ j + 2 \times i + 3 = (i + 2)^2 \land i + 1 \leq x\ |\!) \\
+        &j := j + 2 \times i + 3;\ i := i + 1 \\
+        &(\!|\ INV\ |\!) \\ 
+      \end{split}
+      & 1,2COMP \\
+    \fa \fh (j = (i + 1)^2 \land i \leq x) \land i \neq x & H \\
+    \fa \fa j = (i + 1)^2 \land i \leq x & 4, $\land$EL \\
+    \fa \fa j = (i + 1)^2 & 5, $\land$EL \\
+    \fa \fa i \leq x & 5, $\land$ER \\
+    \fa \fa j = i^2 + 2 \times i + 1 & 6, ARIT \\
+    \fa \fa j + 3 = i^2 + 2 \times i + 4 & 8, ARIT \\
+    \fa \fa j + 2 \times i + 3 = i^2 + 4i + 4 & 9, ARIT \\
+    \fa \fa j + 2 \times i + 3 = (i + 2)^2 & 10, ARIT \\
+    \fa \fa i < x \lor i = x & 7, DEF$\leq$ \\
+    \fa \fa i \neq x & 4, $\land$ER \\
+    \fa \fa (i < x \lor i = x) \land i \neq x & 12,13 $\land$I \\
+    \fa \fa i < x \land i \neq x \lor i = x \land i \neq x & 14, DIST$\land$ \\
+    \fa \fa i < x \land i \neq x \lor \bot & 15, CONTRADIÇÃO \\
+    \fa \fa i < x \land i \neq x & 16, LÓGICA \\
+    \fa \fa i < x & 17, $\land$EL \\
+    \fa \fa i + 1 \leq x & 18, ARIT \\
+    \fa \fa j + 2 \times i + 3 = (i + 2)^2 \land i + 1 \leq x & 11,19 $\land$I \\
+    \fa
+      \begin{split}
+        &(j = (i + 2)^2 \land i \leq x) \land i \neq x \\
+        &\rightarrow \\
+        &j + 2 \times i + 3 = (i + 2)^2 \land i + 1 \leq x \\
+      \end{split}
+      & 4-20, $\rightarrow$I \\
+    \fa 
+      \begin{split}
+        &(\!|\ (j = (i + 1)^2 \land i \leq x) \land i \neq x\ |\!) \\
+        &j := j + 2 \times i + 3;\ i := i + 1 \\
+        &(\!|\ INV\ |\!) \\
+      \end{split}
+      & 3,21,PreStren \\
+    \fa 
+      \begin{split}
+        &(\!|\ INV\ |\!) \\
+        &\text{while}\ i \neq x \left\{j := j + 2 \times i + 3;\ i := i + 1\right\} \\
+        &(\!|\ INV \land \neg (i \neq x)\ |\!) \\
+      \end{split}
+      & 22, PWhile \\
+  \end{fitch}
+\end{equation*}
+
+\newpage
+
+Agora vemos que:
+
+\begin{equation*}
+  \begin{fitch}
+    \fa (\!|\ 4 = (i + 1)^2 \land i \leq x\ |\!)\ j := 4\ (\!|\ INV\ |\!) & ATR \\
+    \fa (\!|\ 4 = (1 + 1)^2 \land 1 \leq x\ |\!)\ i := 1\ (\!|\ 4 = (i + 1)^2 \land i \leq x\ |\!) & ATR \\
+    \fa (\!|\ 4 = (1 + 1)^2 \land 1 \leq x\ |\!)\ i := 1;\ j := 4\ (\!|\ INV\ |\!) & 1,2,COMP \\
+    \fa \fh x > 0 & H \\
+    \fa \fa 4 = 4 & = \\
+    \fa \fa 4 = 2^2 & 5, ARIT \\
+    \fa \fa 4 = (1 + 1)^2 & 6, ARIT \\
+    \fa \fa x \geq 1 & 4, ARIT \\
+    \fa \fa 1 \leq x & 8, ARIT \\
+    \fa \fa 4 = (1 + 1)^2 \land 1 \leq x & 7,9,$\land$I \\
+    \fa x > 0 \rightarrow 4 = (1 + 1)^2 \land 1 \leq x & 4-10, $\rightarrow$I \\
+    \fa (\!|\ x > 0\ |\!)\ i := 1;\ j := 4\ (\!|\ INV\ |\!) & 3,11, PreStren \\
+  \end{fitch}
+\end{equation*}
+
+Com o \emph{while}, que foi concluído na primeira parte, e a composição, que foi
+concluída na seguinda parte, podemos seguir a prova desta maneira:
+
+\begin{equation*}
+  \begin{fitch}
+    \fb
+      \begin{split}
+        &(\!|\ INV\ |\!) \\
+        &\text{while}\ i \neq x \left\{j := j + 2 \times i + 3;\ i := i + 1\right\} \\
+        &(\!|\ INV \land \neg (i \neq x)\ |\!) \\
+      \end{split}
+      & H \\
+    \fj (\!|\ x > 0\ |\!)\ i := 1;\ j := 4\ (\!|\ INV\ |\!) & H \\
+    \fa 
+      \begin{split}
+        &(\!|\ x > 0\ |\!) \\
+        &i := 1;\ j := 4\ \text{while}\ i \neq x \left\{j := j + 2 \times i + 3;\ i := i + 1\right\} \\
+        &(\!|\ INV \land \neg (i \neq x)\ |\!) \\
+      \end{split}
+      & 2,1, COMP \\
+    \fa \fh (j = (i + 1)^2 \land i \leq x) \land \neg (i \neq x) & H \\
+    \fa \fa j = (i + 1)^2 \land i \leq x & 4, $\land$EL \\
+    \fa \fa j = (i + 1)^2 & 5, $\land$EL \\
+    \fa \fa \neg (i \neq x) & 4, $\land$ER \\
+    \fa \fa i = x & 7, LÓGICA \\
+    \fa \fa j = (x + 1)^2 & =E$\left\{6,8\right\}$ \\
+    \fa INV \land \neg (i \neq x) \rightarrow j = (x + 1)^2 & 4-9, $\rightarrow$I \\
+    \fa
+      \begin{split}
+        &(\!|\ x > 0\ |\!) \\
+        &i := 1;\ j := 4\ \text{while}\ i \neq x \left\{j := j + 2 \times i + 3;\ i := i + 1\right\} \\
+        &(\!|\ j = (x + 1)^2\ |\!) \\
+      \end{split}
+      & 3,10,PosWeak \\
+  \end{fitch}
+\end{equation*}
