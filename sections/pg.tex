@@ -47,7 +47,7 @@ Também precisamos provar o seguinte:$n \geq i_0$ Agora veja que:
      \begin{tabular}{rl}
          \emph{$i_0\ =\ 0$}& \emph{i:=0} \\
          \emph{$n\ \geq\ 0$}& \emph{PRE} \\
-         \emph{$n\ \geq\ i_0$}& \emph{Aritimética} \\
+         \emph{$n\ \geq\ i_1$}& \emph{Aritimética} \\
          ~&~\\
          ~&q.e.d\\
      \end{tabular}
@@ -72,12 +72,14 @@ $j_{w+1}=xy^{i_{w+1}}$ agora veja que:
  que: $i_{z+1} \leq x$ agora veja que:
  \begin{center}
      \begin{tabular}{rl}
-         \emph{$i_z \leq x \land \neg(i_z = x) $}& \emph{$\land I$, HI, LOOP} \\
-         \emph{$\neg(i_z=x) \land (i_z =x) \vee \neg(i_z=z) \land (i_z < x)$}&\emph{Distributividade Conjunção} \\
-         \emph{$\neg(i_z =x) \land (i_z < x)$}& \emph{Lógica} \\
-         \emph{$i_z < x$}& \emph{$\land \varepsilon$} \\
-         \emph{$i_z +1 \leq x$}& \emph{Aritimética} \\
-         \emph{$i_{z+1} \leq x$}& \emph{Aritimética} \\
+         \emph{$i_k \leq n \land \neg(i_k = n)$}& \emph{$\land I$, HI, LOOP} \\
+         \emph{$(i_k \leq n \vee i_k = n)\land \neg(i = n)$}&\emph{Definição $\leq$} \\
+         \emph{$(\neg (i_k = n)\land i_k = n) \vee (\neg (i_k = n) \land i_k < n)$}&\emph{Distributividade $\land$} \\
+         \emph{$\bot \vee (\neg(i_k = n) \land i_k < n)$}&\emph{Lógica} \\
+         \emph{$\neg(i_k = n) \land i_k < n)$}&\emph{Lógica} \\
+         \emph{$i_k < n$}&\emph{$\land \varepsilon$} \\
+         \emph{$i_k +1 \leq n$}&\emph{Aritimética} \\
+         \emph{$i_{k + 1} \leq n$}&\emph{i := i + 1} \\
          ~&~\\
          ~&q.e.d\\
      \end{tabular}
