@@ -84,3 +84,77 @@ $j_{w+1}=xy^{i_{w+1}}$ agora veja que:
  \end{center}
 $$(\!|\ x\ \geq\ 0\ \wedge x\ =\ x_0\ \wedge\ y=y_0|\!) i\ :=\ 0; j :=\ x;\
 while\ i \neq\ n \{j\ :=\ j\ *\ y;\ i\ :=\ i\ +\ 1\}(\!| j=x y^n |\!) $$
+
+Depois de termos provado a invariante do \emph{laço} \[INV = j = jy^i \land n
+\geq i\] estamos aptos para verificar se o programa correspondente ao Algoritmo
+2 está correto.
+
+\newpage
+
+\begin{equation*}
+  \begin{fitch}
+    \fa (\!|\ j = jy^{i + 1} \land n \geq i + 1\ |\!)\ i := i + 1\ (\!|\ INV\ |\!) & ATR \\
+    \fa (\!|\ jy = jy^{i + 1} \land n \geq i + 1\ |\!)\ j := jy\ (\!|\ j = jy^{i + 1} \land n \geq i + 1\ |\!) & ATR \\
+    \fa (\!|\ jy = jy^{i + 1} \land n \geq i + 1\ |\!)\ j := jy; i := i + 1\ (\!|\ INV\ |\!) & 1,2,COMP \\
+    \fa \fh j = jy^i \land n \geq i \land i \neq n & H \\
+    \fa \fa n \geq i \land i \neq n & 4,$\land$ER \\
+    \fa \fa (n > i \lor n = i) \land i \neq n & 5,DEF$\geq$ \\
+    \fa \fa (n > i \land i \neq n) \lor (n = i \land i \neq n) & 6,DIST$\land$ \\
+    \fa \fa n > i \land i \neq n \lor \bot & 7,CONTRADIÇÃO \\
+    \fa \fa n > i \land i \neq n & 8,LÓGICA \\
+    \fa \fa n > i & 9,$\land$EL \\
+    \fa \fa n \geq i + 1 & 10,ARIT \\
+    \fa \fa j = jy^i & 4,$\land$EL \\
+    \fa \fa jy = jyy^i & 12,ARIT \\
+    \fa \fa jy = jy^{i + 1} \land n \geq i + 1 & 13,ARIT 11,13,$\land$I \\
+    \fa j = jy^i \land n \geq i \land i \neq n \rightarrow jy = jy^{i + 1} \land n \geq i + 1 & 4-14,$\rightarrow$I \\
+    \fa (\!|\ j = jy^i \land n \geq i \land i \neq n\ |\!)\ j := jy; i := i + 1\ (\!|\ INV\ |\!) & 3,15,PreStren \\
+    \fa (\!|\ INV\ |\!)\ while i \neq n \left\{j := jy;\ i := i + 1\right\}\ (\!|\ INV \land \neg (i \neq n)\ |\!) & 16,PWhile \\
+  \end{fitch}
+\end{equation*}
+
+\newpage
+
+\begin{equation*}
+  \begin{fitch}
+    \fa (\!|\ x = xy^i \land n \geq i\ |\!)\ j := x\ (\!|\ INV\ |\!) & ATR \\
+    \fa (\!|\ x = xy^0 \land n \geq 0\ |\!)\ i := 0\ (\!|\ x = xy^i \land n \geq i\ |\!) & ATR \\
+    \fa (\!|\ x = xy^0 \land n \geq 0\ |\!)\ i := 0;\ j := x\ (\!|\ INV\ |\!) & 1,2,COMP \\
+    \fa \fh n \geq 0 & H \\
+    \fa \fa x = x & = \\
+    \fa \fa x = x \times 1 & 5,ARIT \\
+    \fa \fa x = x \times y^0 & 6,ARIT \\
+    \fa \fa x = xy^0 \land n \geq 0 & 4,7,$\land$I \\
+    \fa n \geq 0 \rightarrow x = xy^0 \land n \geq 0 & 4-8,$\rightarrow$I \\
+    \fa (\!|\ n \geq 0\ |\!)\ i := 0;\ j := x\ (\!|\ INV\ |\!) & 3,9,PreStren \\
+  \end{fitch}
+\end{equation*}
+
+\newpage
+
+\begin{equation*}
+  \begin{fitch}
+    \fa (\!|\ INV\ |\!)\ while i \neq n \left\{j := jy;\ i := i + 1\right\}\ (\!|\ INV \land \neg (i \neq n)\ |\!) & \\
+    \fa (\!|\ n \geq 0\ |\!)\ i := 0;\ j := x\ (\!|\ INV\ |\!) & \\
+    \fa
+      \begin{split}
+        &(\!|\ n \geq 0\ |\!) \\
+        &i := 0;\ j := x;\ while i \neq n \left\{j := jy;\ i := i + 1\right\} \\
+        &(\!|\ INV \land \neg (i \neq n)\ |\!) \\
+      \end{split}
+      & 1,2,COMP \\
+    \fa \fh j = jy^i \land n \geq i \land \neg (i \neq n) & H \\
+    \fa \fa j = jy^i & 4,$\land$EL \\
+    \fa \fa \neg (i \neq n) & 4,$\land$ER \\
+    \fa \fa i = n & 6,LÓGICA \\
+    \fa \fa j = jy^n & =E$\left\{5,7\right\}$ \\
+    \fa INV \land \neg (i \neq n) \rightarrow j = jy^n & 4-8,$\rightarrow$I \\
+    \fa
+      \begin{split}
+        &(\!|\ n \geq 0\ |\!) \\
+        &i := 0;\ j := x;\ while i \neq n \left\{j := jy;\ i := i + 1\right\} \\
+        &(\!|\ j = jy^n\ |\!) \\
+      \end{split}
+      & 3,9,PosWeak \\
+  \end{fitch}
+\end{equation*}
