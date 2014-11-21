@@ -89,8 +89,6 @@ Depois de termos provado a invariante do \emph{laço} \[INV = j = jy^i \land n
 \geq i\] estamos aptos para verificar se o programa correspondente ao Algoritmo
 2 está correto.
 
-\newpage
-
 \begin{equation*}
   \begin{fitch}
     \fa (\!|\ j = jy^{i + 1} \land n \geq i + 1\ |\!)\ i := i + 1\ (\!|\ INV\ |\!) & ATR \\
@@ -113,7 +111,7 @@ Depois de termos provado a invariante do \emph{laço} \[INV = j = jy^i \land n
   \end{fitch}
 \end{equation*}
 
-\newpage
+Agora vemos que:
 
 \begin{equation*}
   \begin{fitch}
@@ -130,7 +128,8 @@ Depois de termos provado a invariante do \emph{laço} \[INV = j = jy^i \land n
   \end{fitch}
 \end{equation*}
 
-\newpage
+Com o \emph{while}, que foi concluído na primeira parte, e a composição, que foi
+concluída na seguinda parte, podemos seguir a prova desta maneira:
 
 \begin{equation*}
   \begin{fitch}
