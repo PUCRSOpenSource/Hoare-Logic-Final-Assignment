@@ -8,7 +8,6 @@ O algotimo 2 retorna o n-ésimo termo de uma progressão geométrica de razão
 expresso, utilizando a notação de Hoare, da seguinte forma:
 
 \subsubsection{Prova da Inavariante do Loop}
-\label{ssub:Prova da Inavariante do Loop}
 
 Nesta seção demonstraremos a prova da invariante do loop. Após ser feita a
 análise do comportamento das variáveis duranda a execução do programa chegamos a
@@ -55,16 +54,14 @@ Também precisamos provar o seguinte:$n \geq i_0$ Agora veja que:
  \end{center}
 
 \paragraph{Caso Indutivo P(n)}
-Assumindo \emph{n} como um valor arbitrário e como hipótese de indução
-$\forall k :\mathbb{N} .\ j_k=(i_k\ +\ 1)^2$ temos que mostrar que: 
-$j_{k+1}=(i_{k+1}\ +\ 1)^2$ agora veja que:
+Assumindo \emph{w} como um valor arbitrário e como hipótese de indução
+$\forall w :\mathbb{N} .\ j_w=xy^i_w$ temos que mostrar que: 
+$j_{w+1}=xy^{i_{w+1}}$ agora veja que:
  \begin{center}
      \begin{tabular}{rll}
-         \emph{$(i_{k+1}\ +\ 1)$} =& \emph{$((i_w\ +\ 1)\ +\ 1)^2$} & \emph{(i := i + 1 )} \\
-                                  =& \emph{$(i_w + 1)^2 + 2(i_w +1) + 1$}& \emph{(Artmimética)}\\ 
-                                  =& \emph{$j_w + 2(i_w + 1) + 1$}& \emph{(H.I)}\\        
-                                  =& \emph{$j_w + 2i_w + 3$}& \emph{(Aritimética)}\\ 
-         =& \emph{$j_{w+1} $}& \emph{(j := j + 2*i + 3)}\\ 
+         \emph{$xy^{i_w+1}$} =& \emph{$(xy^w)y$} & \emph{(Aritimética)} \\
+                                  =& \emph{$j_w*y$}& \emph{(Artmimética)}\\ 
+                                  =& \emph{$j_{w+1}$}& \emph{(j := j*y)}\\        
          ~&~&~\\
          ~&~&q.e.d\\
      \end{tabular}
