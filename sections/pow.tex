@@ -7,9 +7,91 @@ seguinte tupla de hoare:
 
 $$(\!|\ x > 0\ |\!)\ i := 1;\ j := 4\ \text{while}\ i \neq x \left\{j := j + 2 \times i + 3;\ i := i + 1\right\}\ (\!|\ j = (x + 1)^2\ |\!)$$
 
+\subsubsection{Prova da Inavariante do Loop}
+\label{ssub:Prova da Inavariante do Loop}
+
+Nesta seção demonstraremos a prova da invariante do loop. Após ser feita a
+análise do comportamento das variáveis duranda a execução do programa chegamos a
+conclusão que a invariate do loop era:
+
+$$ j\  =\ (i\ +\ 1)^2\ \land i\ \leq\ x $$
+
+Porém é preciso provar que a invariante é válida para qualquer momento do
+código. A prova será feita utilizando indução, com isso apresentaremos a prova
+para um caso base, neste caso a base será repsentada pelo número zero que marca
+que o laço não ocorreu. Assumiremos a validade da invariante para \emph{n} e
+desmontraremos que a também se mantém vardadeira para \emph{n + 1}.
+
+\paragraph{Prova:} 
+Devemos provar o seguinte: $P \triangleq \forall_k :\mathbb{N} .\ j_k=(i_k\ +\ 1)^2\ \land\
+i_k \leq x$. Assumindo o teorema da distributividade do para todo temos o
+seguinte:
+
+$$\forall_w :\mathbb{N}.\ j_w=(i_w\ +1)^2\ \land  \forall_z:\mathbb{N}. i_z \leq x$$
+
+Com isso devemos demonstrar a prova para cada lado da conjunção. Agora Veja:
+
+\paragraph{Caso Base P(0)}
+É necessário provar o seguinte: $ j_0 =(i_0\ +\ 1)^2 $ Agora veja que:
+ \begin{center}
+     \begin{tabular}{rll}
+         \emph{$j_0$} =& \emph{4} & \emph{(j := 4)} \\
+                      =& \emph{$2^2$}& \emph{(Artmimética)}\\ 
+                      =& \emph{$(1\ +\ 1)^2$}& \emph{(Aritmética)}\\        
+                      =& \emph{$(i_0\ +\ 1)^2$}& \emph{(i := 1)}\\ 
+         ~&~&~\\
+         ~&~&q.e.d\\
+     \end{tabular}
+ \end{center}
+Também precisamos provar o seguinte:$i_0 \leq x$ Agora veja que:
+ \begin{center}
+     \begin{tabular}{rl}
+         \emph{$x\ \geq\ 0$}& \emph{PRE} \\
+         \emph{$x\ \geq\ 1$}& \emph{Aritimética} \\
+         \emph{$x\ \geq\ i_0$}& \emph{$i_0$ := 1} \\
+         \emph{$i_0\ \leq\ x$}& \emph{Aritimética} \\
+         ~&~\\
+         ~&q.e.d\\
+     \end{tabular}
+ \end{center}
+
+\paragraph{Caso Indutivo P(n)}
+Assumindo \emph{n} como um valor arbitrário e como hipótese de indução
+$\forall k :\mathbb{N} .\ j_k=(i_k\ +\ 1)^2$ temos que mostrar que: 
+$j_{k+1}=(i_{k+1}\ +\ 1)^2$ agora veja que:
+ \begin{center}
+     \begin{tabular}{rll}
+         \emph{$(i_{k+1}\ +\ 1)$} =& \emph{$((i_w\ +\ 1)\ +\ 1)^2$} & \emph{(i := i + 1 )} \\
+                                  =& \emph{$(i_w + 1)^2 + 2(i_w +1) + 1$}& \emph{(Artmimética)}\\ 
+                                  =& \emph{$j_w + 2(i_w + 1) + 1$}& \emph{(H.I)}\\        
+                                  =& \emph{$j_w + 2i_w + 3$}& \emph{(Aritimética)}\\ 
+         =& \emph{$j_{w+1} $}& \emph{(j := j + 2*i + 3)}\\ 
+         ~&~&~\\
+         ~&~&q.e.d\\
+     \end{tabular}
+ \end{center}
+
+ Também precisamos provar assumindo \emph{z} como um valor arbitrário e como
+ hipótese de indução $\forall z : \mathbb{N}\ .\ i_z \leq x$ temos que mostrar
+ que: $i_{z+1} \leq x$ agora veja que:
+ \begin{center}
+     \begin{tabular}{rl}
+         \emph{$i_z \leq x \land \neg(i_z = x) $}& \emph{$\land I$, HI, LOOP} \\
+         \emph{$\neg(i_z=x) \land (i_z =x) \vee \neg(i_z=z) \land (i_z < x)$}&\emph{Distributividade Conjunção} \\
+         \emph{$\neg(i_z =x) \land (i_z < x)$}& \emph{Lógica} \\
+         \emph{$i_z < x$}& \emph{$\land \varepsilon$} \\
+         \emph{$i_z +1 \leq x$}& \emph{Aritimética} \\
+         \emph{$i_{z+1} \leq x$}& \emph{Aritimética} \\
+         ~&~\\
+         ~&q.e.d\\
+     \end{tabular}
+ \end{center}
+\subsection{Prova da Tripla de Hoare}
+\label{sub:hoarepow}
+
 Depois de termos provado a invariante do \emph{laço} \[INV = j = (i + 1)^2
 \land i \leq x\] estamos aptos para verificar se o programa correspondente ao
-algoritmo 1 está correto.
+Algoritmo 1 está correto.
 
 \begin{equation*}
   \begin{fitch}
